@@ -14,9 +14,9 @@ connectDB()
 connectCloudinary()
 
 const allowedOrigins = [
+    "http://localhost:5173",
     "https://hms-user-frontend-l4bc.vercel.app",
-    "https://hms-user-frontend-7wsv.vercel.app",
-    "http://localhost:5173"
+    "https://hms-user-frontend-7wsv.vercel.app"
 ]
 
 // CORS middleware
@@ -27,7 +27,7 @@ app.use(cors({
     credentials: true
 }))
 
-// Handle preflight OPTIONS requests
+// Handle preflight OPTIONS requests for all routes
 app.options("*", cors({
     origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
