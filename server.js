@@ -48,6 +48,12 @@ connectCloudinary();
 const allowedOrigins = [
     'http://localhost:5173',
     'https://hms-user-frontend-akxp.vercel.app',
+    'https://hms-user-frontend-l4bc.vercel.app',
+    'https://hms-user-frontend-7wsv.vercel.app',
+    'https://hms-user-frontend.vercel.app',
+    'https://hms-user-frontend-x3rb.vercel.app',
+    'https://hms-user-frontend-slms.vercel.app',
+    'https://hms-user-frontend-hzdf.vercel.app',
     // Add any other production frontend URLs here
     
 ];
