@@ -7,23 +7,42 @@ import adminRouter from './routes/adminRoute.js'
 import doctorRouter from './routes/doctorRoute.js'
 import userRouter from './routes/userRoute.js'
 
-// app config
-const app=express()
-const port=process.env.PORT || 4000
+const app = express()
+const port = process.env.PORT || 4000
+
 connectDB()
 connectCloudinary()
 
-// middleware 
+const allowedOrigins = [
+    "https://hms-user-frontend-l4bc.vercel.app",
+    "https://hms-user-frontend-7wsv.vercel.app",
+    "http://localhost:5173"
+]
+
+// CORS middleware
+app.use(cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "token"],
+    credentials: true
+}))
+
+// Handle preflight OPTIONS requests
+app.options("*", cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "token"],
+    credentials: true
+}))
+
 app.use(express.json())
-app.use(cors())
 
-// api end point 
-app.use('/api/admin',adminRouter)
-app.use('/api/doctor',doctorRouter)
-app.use('/api/user',userRouter)
+app.use('/api/admin', adminRouter)
+app.use('/api/doctor', doctorRouter)
+app.use('/api/user', userRouter)
 
-app.get('/',(req,res)=>{
-    res.send('api')
+app.get('/', (req, res) => {
+    res.json({ message: 'Backend API running' })
 })
 
-app.listen(port,()=>console.log("server started",port))
+app.listen(port, () => console.log(`Server started on port ${port}`))
